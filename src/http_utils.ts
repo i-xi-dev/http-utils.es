@@ -1,33 +1,43 @@
 type codepoint = number;
 
-namespace HttpUtils {
-  export type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
+type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
 
-  export const CodePointRange = {
+function _patternFromCodePointRange(range: CodePointRange): string {
+  return range.map((part) => {
+    if (part.length === 2) {
+      return `\\u{${part[0].toString(16)}}-\\u{${part[1].toString(16)}}`;
+    } else {
+      return `\\u{${part[0].toString(16)}}`;
+    }
+  }).join("");
+}
+
+namespace HttpUtils {
+  export const Pattern = {
     /** [ASCII whitespace](https://infra.spec.whatwg.org/#ascii-whitespace) */
-    ASCII_WHITESPACE: [
+    ASCII_WHITESPACE: _patternFromCodePointRange([
       [0x9],
       [0xA],
       [0xC],
       [0xD],
       [0x20],
-    ] as CodePointRange,
+    ]),
 
     /** [HTTP quoted-string token code point](https://mimesniff.spec.whatwg.org/#http-quoted-string-token-code-point) */
-    HTTP_QUOTED_STRING_TOKEN: [
+    HTTP_QUOTED_STRING_TOKEN: _patternFromCodePointRange([
       [0x9],
       [0x20, 0x7E],
       [0x80, 0xFF],
-    ] as CodePointRange,
+    ]),
 
     /** [HTTP tab or space](https://fetch.spec.whatwg.org/#http-tab-or-space) */
-    HTTP_TAB_OR_SPACE: [
+    HTTP_TAB_OR_SPACE: _patternFromCodePointRange([
       [0x9],
       [0x20],
-    ] as CodePointRange,
+    ]),
 
     /** [HTTP token code point](https://mimesniff.spec.whatwg.org/#http-token-code-point) */
-    HTTP_TOKEN: [
+    HTTP_TOKEN: _patternFromCodePointRange([
       [0x21],
       [0x23, 0x27],
       [0x2A],
@@ -40,15 +50,15 @@ namespace HttpUtils {
       [0x61, 0x7A],
       [0x7C],
       [0x7E],
-    ] as CodePointRange,
+    ]),
 
     /** [HTTP whitespace](https://fetch.spec.whatwg.org/#http-whitespace) */
-    HTTP_WHITESPACE: [
+    HTTP_WHITESPACE: _patternFromCodePointRange([
       [0x9],
       [0xA],
       [0xD],
       [0x20],
-    ] as CodePointRange,
+    ]),
   } as const;
 
   export type CollectResult = {
