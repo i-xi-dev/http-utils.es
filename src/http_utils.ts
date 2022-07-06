@@ -3,13 +3,14 @@ type codepoint = number;
 type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
 
 function _patternFromCodePointRange(range: CodePointRange): string {
-  return range.map((part) => {
+  const pattern = range.map((part) => {
     if (part.length === 2) {
       return `\\u{${part[0].toString(16)}}-\\u{${part[1].toString(16)}}`;
     } else {
       return `\\u{${part[0].toString(16)}}`;
     }
   }).join("");
+  return "[" + pattern + "]+";
 }
 
 namespace HttpUtils {
