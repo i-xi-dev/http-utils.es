@@ -1,7 +1,9 @@
 type codepoint = number;
-
 type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
 
+/**
+ * @internal
+ */
 function _patternFromCodePointRange(range: CodePointRange): string {
   const pattern = range.map((part) => {
     if (part.length === 2) {
