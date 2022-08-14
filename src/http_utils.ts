@@ -1,3 +1,5 @@
+import { StringUtils } from "https://raw.githubusercontent.com/i-xi-dev/str.es/1.0.5/mod.ts";
+
 type codepoint = number;
 type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
 
@@ -128,6 +130,78 @@ namespace HttpUtils {
       collected: value,
       progression: (i + 1),
     };
+  }
+
+  /**
+   * Headers#getで取得した値を分割する
+   * （複数ヘッダーだった場合、","で連結されているので分割する）
+   *
+   * かつてはHeaders#getAllすれば良かったが、それは廃止されたので。
+   *
+   * {@link https://fetch.spec.whatwg.org/#concept-header-list-get-decode-split} のsplitの部分の仕様で分割する
+   *
+   * @param value Headers#getで取得した値
+   * @returns 分割結果
+   */
+  export function valuesOfHeaderFieldValue(value: string): Array<string> {
+    const exclude = "[^\\u{22}\\u{2C}]+";
+    const values: Array<string> = [];
+
+    if (/[\u0022\u002C]/.test(value) !== true) {
+      const trimmed = StringUtils.trim(
+        value,
+        Pattern.HTTP_TAB_OR_SPACE,
+      );
+      if (trimmed.length > 0) {
+        return [trimmed];
+      } else {
+        return [];
+      }
+    }
+
+    let i = 0;
+    let vEnd = false;
+    let cc = 0;
+    let v = "";
+    while (i < value.length) {
+      const collected = StringUtils.collectStart(
+        value.substring(i),
+        exclude,
+      );
+      i = i + collected.length;
+      v = v + collected;
+      const remains = value.substring(i);
+      if (remains.startsWith("\u0022")) {
+        const result = collectHttpQuotedString(remains);
+        v = v + remains.substring(0, result.progression);
+        i = i + result.progression;
+        if (result.following === true) {
+          continue;
+        }
+      } else {
+        //  または ","始まり
+        i = i + 1;
+        vEnd = true;
+        if (remains.startsWith("\u002C")) {
+          cc = cc + 1;
+        }
+      }
+
+      if (vEnd === true) {
+        values.push(StringUtils.trim(v, Pattern.HTTP_TAB_OR_SPACE));
+        v = "";
+        vEnd = false;
+      }
+    }
+    if (v !== "") {
+      values.push(StringUtils.trim(v, Pattern.HTTP_TAB_OR_SPACE));
+    }
+    if (values.length < (cc + 1)) {
+      // 末尾が","だった場合 //XXX スマートに（cc不要に）できるのでは？
+      values.push("");
+    }
+
+    return values;
   }
 }
 
