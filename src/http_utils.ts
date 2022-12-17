@@ -1,4 +1,4 @@
-import { StringUtils } from "https://raw.githubusercontent.com/i-xi-dev/str.es/1.0.5/mod.ts";
+import { StringUtils } from "i-xi-dev/str.es";
 
 type codepoint = number;
 type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
