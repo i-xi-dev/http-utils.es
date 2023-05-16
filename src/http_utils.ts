@@ -1,4 +1,4 @@
-import { StringUtils } from "i-xi-dev/str.es";
+import { StringUtils } from "../deps.ts";
 
 type codepoint = number;
 type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
