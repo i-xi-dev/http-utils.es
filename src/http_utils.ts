@@ -1,4 +1,4 @@
-import { StringUtils } from "../deps.ts";
+import { StringEx } from "../deps.ts";
 
 type codepoint = number;
 type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
@@ -17,7 +17,7 @@ function _patternFromCodePointRange(range: CodePointRange): string {
   return "[" + pattern + "]+";
 }
 
-namespace HttpUtils {
+export namespace HttpUtils {
   export const Pattern = {
     /** [ASCII whitespace](https://infra.spec.whatwg.org/#ascii-whitespace) */
     ASCII_WHITESPACE: _patternFromCodePointRange([
@@ -148,7 +148,7 @@ namespace HttpUtils {
     const values: Array<string> = [];
 
     if (/[\u0022\u002C]/.test(value) !== true) {
-      const trimmed = StringUtils.trim(
+      const trimmed = StringEx.trim(
         value,
         Pattern.HTTP_TAB_OR_SPACE,
       );
@@ -164,7 +164,7 @@ namespace HttpUtils {
     let cc = 0;
     let v = "";
     while (i < value.length) {
-      const collected = StringUtils.collectStart(
+      const collected = StringEx.collectStart(
         value.substring(i),
         exclude,
       );
@@ -188,13 +188,13 @@ namespace HttpUtils {
       }
 
       if (vEnd === true) {
-        values.push(StringUtils.trim(v, Pattern.HTTP_TAB_OR_SPACE));
+        values.push(StringEx.trim(v, Pattern.HTTP_TAB_OR_SPACE));
         v = "";
         vEnd = false;
       }
     }
     if (v !== "") {
-      values.push(StringUtils.trim(v, Pattern.HTTP_TAB_OR_SPACE));
+      values.push(StringEx.trim(v, Pattern.HTTP_TAB_OR_SPACE));
     }
     if (values.length < (cc + 1)) {
       // 末尾が","だった場合 //XXX スマートに（cc不要に）できるのでは？
@@ -204,7 +204,3 @@ namespace HttpUtils {
     return values;
   }
 }
-
-Object.freeze(HttpUtils);
-
-export { HttpUtils };
