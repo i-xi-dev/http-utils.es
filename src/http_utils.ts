@@ -1,7 +1,6 @@
-import { StringEx } from "../deps.ts";
+import { CodePoint, StringEx } from "../deps.ts";
 
-type codepoint = number;
-type CodePointRange = Array<[codepoint] | [codepoint, codepoint]>;
+type CodePointRange = Array<[CodePoint] | [CodePoint, CodePoint]>;
 
 /**
  * @internal

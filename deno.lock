@@ -42,11 +42,12 @@
     "https://raw.githubusercontent.com/i-xi-dev/number.es/6.0.0/src/uint6.ts": "beef65810c717d3a9f097e279407fbeb2ed06e6da23915f776d31c897cb32d6b",
     "https://raw.githubusercontent.com/i-xi-dev/number.es/6.0.0/src/uint7.ts": "2132a925677234c9ca3ce017d76092dca1cb490a1acefe73539f55763506c7fc",
     "https://raw.githubusercontent.com/i-xi-dev/number.es/6.0.0/src/uint8.ts": "4b9617d162fa361b9e909424c35249c6fd873828cdf7b10cbe60300e25156ecf",
-    "https://raw.githubusercontent.com/i-xi-dev/string.es/5.0.0/deps.ts": "1e34e0b520b2180219c98cdaceb5ea252ceec9fbcadbbbd15ee94ed874fcb075",
-    "https://raw.githubusercontent.com/i-xi-dev/string.es/5.0.0/mod.ts": "c8ff8a2b22ba2a0f6a9dbbdffc4f6426388820882ea909a7557f7a290991203e",
-    "https://raw.githubusercontent.com/i-xi-dev/string.es/5.0.0/src/code_point.ts": "fd47307c9b7ac681cff2477e8e7100067d7a4591a2f93e653473102ae15c41e1",
-    "https://raw.githubusercontent.com/i-xi-dev/string.es/5.0.0/src/general_category.ts": "ed37611e5b64b9e4c9e84f9675900b2bd1a0ad629fbd90f5e512558580c55f0c",
-    "https://raw.githubusercontent.com/i-xi-dev/string.es/5.0.0/src/isomorphic.ts": "f5d1fc8bc7a7b7be3c5fe492d1c003ee597ca72a6c23282e30094b99fc428a92",
-    "https://raw.githubusercontent.com/i-xi-dev/string.es/5.0.0/src/main.ts": "a3d1a773b26b408fbb1e3abdd66812f6f02b33edb49588f09701efdd57070441"
+    "https://raw.githubusercontent.com/i-xi-dev/string.es/6.0.0/deps.ts": "1e34e0b520b2180219c98cdaceb5ea252ceec9fbcadbbbd15ee94ed874fcb075",
+    "https://raw.githubusercontent.com/i-xi-dev/string.es/6.0.0/mod.ts": "0fb3ce15add274c952d3f811826e3ddddc9f21108b42d3ee23a2537fb58a8ba6",
+    "https://raw.githubusercontent.com/i-xi-dev/string.es/6.0.0/src/code_point.ts": "fd47307c9b7ac681cff2477e8e7100067d7a4591a2f93e653473102ae15c41e1",
+    "https://raw.githubusercontent.com/i-xi-dev/string.es/6.0.0/src/general_category.ts": "ed37611e5b64b9e4c9e84f9675900b2bd1a0ad629fbd90f5e512558580c55f0c",
+    "https://raw.githubusercontent.com/i-xi-dev/string.es/6.0.0/src/isomorphic.ts": "f5d1fc8bc7a7b7be3c5fe492d1c003ee597ca72a6c23282e30094b99fc428a92",
+    "https://raw.githubusercontent.com/i-xi-dev/string.es/6.0.0/src/main.ts": "a3d1a773b26b408fbb1e3abdd66812f6f02b33edb49588f09701efdd57070441",
+    "https://raw.githubusercontent.com/i-xi-dev/string.es/6.0.0/src/rune.ts": "bb609fbca9554b4f341ad45ac6c7f32b4a472f34f49699e7b180b87b3abc56da"
   }
 }
