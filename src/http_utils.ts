@@ -1,20 +1,20 @@
-import { CodePoint, StringEx } from "../deps.ts";
+import { CodePointRange, StringEx } from "../deps.ts";
 
-type CodePointRange = Array<[CodePoint] | [CodePoint, CodePoint]>;
+type CodePointRanges = Array<CodePointRange>;
 
 /**
  * @internal
  */
-function _patternFromCodePointRange(range: CodePointRange): string {
-  const pattern = range.map((part) => {
-    if (part.length === 2) {
-      return `\\u{${part[0].toString(16)}}-\\u{${part[1].toString(16)}}`;
+function _patternFromCodePointRange(ranges: CodePointRanges): string {
+  const pattern = ranges.map((range) => {
+    if (range.length === 2) {
+      return `\\u{${range[0].toString(16)}}-\\u{${range[1].toString(16)}}`;
     } else {
-      return `\\u{${part[0].toString(16)}}`;
+      return `\\u{${range[0].toString(16)}}`;
     }
   }).join("");
   return "[" + pattern + "]+";
-}
+} //TODO unicode.esに移す
 
 export namespace HttpUtils {
   export const Pattern = {
